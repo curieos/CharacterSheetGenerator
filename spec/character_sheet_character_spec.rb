@@ -30,5 +30,15 @@ RSpec.describe "Character" do
 			expect(new_character.level).to eq(1)
 		end
 
+		describe "#level_up" do
+			it "takes in an optional class" do
+				new_class = CharacterSheetGenerator::Class.new("new class", 10)
+				multi_class = CharacterSheetGenerator::Class.new("other class", 8)
+				new_character = CharacterSheetGenerator::Character.new("new character", new_class)
+
+				new_character.level_up()
+				new_character.level_up(multi_class)
+			end
+		end
 	end
 end

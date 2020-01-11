@@ -14,4 +14,8 @@ class CharacterSheetGenerator::Character
 		end
 		level
 	end
+
+	def level_up(_class = nil)
+
+	end
 end
