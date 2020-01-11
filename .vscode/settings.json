@@ -1,5 +1,8 @@
 {
 	"psi-header.changes-tracking": {
 		"autoHeader": "off"	
-	}
+	},
+	"ruby.codeCompletion": "rcodetools",
+	"ruby.format": "standard",
+	"ruby.intellisense": "rubyLocate"
 }
