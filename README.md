@@ -1,6 +1,6 @@
 # CharacterSheetGenerator
 
-This Gem is for managing character sheets for D&D. Asside from managing sheets using a CLI interface, it also has public-facing methods for interfacing with 3rd party software.
+This Gem is for managing character sheets for D&D. Aside from managing sheets using a CLI interface, it also has public-facing methods for interfacing with 3rd party software.
 
 ## Installation
 
