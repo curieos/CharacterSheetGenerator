@@ -48,6 +48,17 @@ RSpec.describe "Character" do
 
 				expect(new_character.level).to eq(2)
 			end
+
+			it "adds a new class to the list" do
+				new_class = CharacterSheetGenerator::Class.new("new class", 10)
+				multi_class = CharacterSheetGenerator::Class.new("other class", 8)
+				new_character = CharacterSheetGenerator::Character.new("new character", new_class)
+
+				new_character.level_up(multi_class)
+				
+				expect(new_character.classes).to include(multi_class)
+			end
+				new_character = CharacterSheetGenerator::Character.new("new character", new_class)
 		end
 	end
 end

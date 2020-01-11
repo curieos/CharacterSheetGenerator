@@ -16,6 +16,7 @@ class CharacterSheetGenerator::Character
 	end
 
 	def level_up(_class = nil)
-		classes[0].level_up()
+		@classes << _class if _class.is_a?(CharacterSheetGenerator::Class)
+		@classes[0].level_up() if _class == nil
 	end
 end
