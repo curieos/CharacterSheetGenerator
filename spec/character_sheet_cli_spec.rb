@@ -22,6 +22,14 @@ RSpec.describe "CLI" do
 
 			capture_puts { cli.call() }
 		end
+
+		it "can call #help" do
+			allow(cli).to receive(:gets).and_return("help", "exit")
+
+			expect(cli).to receive(:help)
+
+			capture_puts { cli.call() }
+		end
 	end
 
 end
