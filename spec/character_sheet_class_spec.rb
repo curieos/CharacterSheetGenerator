@@ -20,4 +20,12 @@ RSpec.describe "Class" do
 	it "has a hit die" do
 		expect(dummy_class.hit_die).to eq(10)
 	end
+
+	it "has method #level_up that increases the level" do
+		new_class = CharacterSheetGenerator::Class.new("new class", 8)
+
+		new_class.level_up()
+
+		expect(new_class.level).to eq(2)
+	end
 end

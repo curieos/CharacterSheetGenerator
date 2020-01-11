@@ -6,4 +6,8 @@ class CharacterSheetGenerator::Class
 		@level = 1
 		@hit_die = hit_die
 	end
+
+	def level_up
+		@level += 1
+	end
 end
