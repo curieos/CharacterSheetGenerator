@@ -58,7 +58,18 @@ RSpec.describe "Character" do
 				
 				expect(new_character.classes).to include(multi_class)
 			end
+
+			it "levels up existing class if a class name is passed" do
+				new_class = CharacterSheetGenerator::Class.new("new class", 10)
+				multi_class = CharacterSheetGenerator::Class.new("other class", 8)
 				new_character = CharacterSheetGenerator::Character.new("new character", new_class)
+
+				new_character.level_up(multi_class)
+				new_character.level_up("other class")
+				
+				expect(new_character.classes[0].level).to eq(1)
+				expect(new_character.classes[1].level).to eq(2)
+			end
 		end
 	end
 end
