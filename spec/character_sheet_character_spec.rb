@@ -39,6 +39,15 @@ RSpec.describe "Character" do
 				new_character.level_up()
 				new_character.level_up(multi_class)
 			end
+
+			it "levels up the existing class" do
+				new_class = CharacterSheetGenerator::Class.new("new class", 10)
+				new_character = CharacterSheetGenerator::Character.new("new character", new_class)
+				
+				new_character.level_up()
+
+				expect(new_character.level).to eq(2)
+			end
 		end
 	end
 end
