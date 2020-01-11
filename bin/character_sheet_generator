@@ -1,3 +1,4 @@
 #!/usr/bin/env ruby
+require "./lib/character_sheet_generator"
 
-puts "Welcome to the character sheet generator"
+CharacterSheetGenerator::CLI.new().call()

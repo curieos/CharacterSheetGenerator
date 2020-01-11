@@ -1,5 +1,2 @@
-require "character_sheet_generator/version"
-
-module CharacterSheetGenerator
-  # Your code goes here...
-end
+require_relative "character_sheet_generator/version"
+require_relative "./character_sheet_generator/cli"
