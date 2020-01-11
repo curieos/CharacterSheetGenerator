@@ -14,6 +14,8 @@ class CharacterSheetGenerator::CLI
 			case input
 			when "help"
 				help
+			else
+				puts "'#{input}' is not a recognized command"
 			end
 		end
 	end

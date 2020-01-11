@@ -9,8 +9,7 @@ RSpec.describe "CLI" do
 		it "puts out a welcome message" do
 			allow(cli).to receive(:gets).and_return("exit")
 
-			expect($stdout).to receive(:puts)
-			expect($stdout).to receive(:puts)
+			expect($stdout).to receive(:puts).at_least(:once)
 
 			cli.call()
 		end
@@ -29,6 +28,16 @@ RSpec.describe "CLI" do
 			expect(cli).to receive(:help)
 
 			capture_puts { cli.call() }
+		end
+
+		it "recognizes invalid input" do
+			fake_command = "fake-command"
+			allow(cli).to receive(:gets).and_return(fake_command, "exit")
+
+			expect($stdout).to receive(:puts).with(any_args).twice
+			expect($stdout).to receive(:puts).with("'#{fake_command}' is not a recognized command")
+
+			cli.call()
 		end
 	end
 
