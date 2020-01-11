@@ -6,4 +6,12 @@ class CharacterSheetGenerator::Character
 		@classes = []
 		@classes << _class
 	end
+
+	def level
+		level = 0
+		@classes.each do |_class|
+			level += _class.level
+		end
+		level
+	end
 end

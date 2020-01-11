@@ -21,4 +21,14 @@ RSpec.describe "Character" do
 			expect(new_character.classes).to include(new_class)
 		end
 	end
+
+	describe "level methods" do
+		it "has a #level method that totals class levels" do
+			new_class = CharacterSheetGenerator::Class.new("new class", 10)
+			new_character = CharacterSheetGenerator::Character.new("new character", new_class)
+
+			expect(new_character.level).to eq(1)
+		end
+
+	end
 end
