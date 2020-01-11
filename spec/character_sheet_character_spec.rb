@@ -11,4 +11,13 @@ RSpec.describe "Character" do
 
 		expect(new_character.name).to eq(dummy_name)
 	end
+
+	describe '#class' do
+		it "exists" do
+			new_class = CharacterSheetGenerator::Class.new("new class")
+			new_character = CharacterSheetGenerator::Character.new("new character", new_class)
+
+			expect(new_character.classes).to include(new_class)
+		end
+	end
 end

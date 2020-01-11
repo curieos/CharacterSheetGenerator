@@ -1,7 +1,9 @@
 class CharacterSheetGenerator::Character
-	attr_reader :name
+	attr_reader :name, :classes
 
-	def initialize(name)
-		@name = name
+	def initialize(_name, _class = nil)
+		@name = _name
+		@classes = []
+		@classes << _class if _class != nil
 	end
 end
