@@ -1,5 +1,5 @@
 RSpec.describe "Class" do
-	let(:dummy_class) { CharacterSheetGenerator::Class.new("Dummy Name") }
+	let(:dummy_class) { CharacterSheetGenerator::Class.new("Dummy Name", 10) }
 
 	it "exists" do
 		expect(dummy_class).to_not be_nil
@@ -15,5 +15,9 @@ RSpec.describe "Class" do
 
 	it "sets level to 1" do
 		expect(dummy_class.level).to eq(1)
+	end
+
+	it "has a hit die" do
+		expect(dummy_class.hit_die).to eq(10)
 	end
 end

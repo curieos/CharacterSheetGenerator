@@ -1,5 +1,5 @@
 RSpec.describe "Character" do
-	let(:dummy_class) { CharacterSheetGenerator::Class.new("Dummy Class") }
+	let(:dummy_class) { CharacterSheetGenerator::Class.new("Dummy Class", 10) }
 	let(:dummy_character) { CharacterSheetGenerator::Character.new("Dummy Name", dummy_class) }
 
 	it "exists" do
@@ -15,7 +15,7 @@ RSpec.describe "Character" do
 
 	describe '#class' do
 		it "exists" do
-			new_class = CharacterSheetGenerator::Class.new("new class")
+			new_class = CharacterSheetGenerator::Class.new("new class", 10)
 			new_character = CharacterSheetGenerator::Character.new("new character", new_class)
 
 			expect(new_character.classes).to include(new_class)
