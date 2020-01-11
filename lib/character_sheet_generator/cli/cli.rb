@@ -13,17 +13,23 @@ class CharacterSheetGenerator::CLI
 
 			case input
 			when "export"
-
+				export
 			when "help"
 				help
 			when "list"
 				list
 			when "new"
-
+				new_character
+			when "pdf"
+				pdf
 			else
 				puts "'#{input}' is not a recognized command"
 			end
 		end
+	end
+
+	def export
+		puts "not implemented"
 	end
 
 	def help
@@ -35,11 +41,31 @@ class CharacterSheetGenerator::CLI
 			help - displays this help page
 			list - lists existing characters
 			new - creates a new character
+			pdf - saves a character as a PDF
 		DOC
 		puts ""
 	end
 
 	def list
-		return puts "No characters exist!" if @characters.length == 0
+		puts ""
+		return puts "No characters exist!\n\n" if @characters.length == 0
+		puts "Characters:"
+		@characters.each do |character|
+			puts "#{character.name}"
+		end
+		puts ""
+	end
+
+	def new_character
+		puts ""
+		puts "Enter a name for your character:"
+		name = gets.strip
+		character = CharacterSheetGenerator::Character.new(name, CharacterSheetGenerator::Class.new("Bard", 6))
+		@characters << character
+		puts ""
+	end
+
+	def pdf
+		puts "not implemented"
 	end
 end
