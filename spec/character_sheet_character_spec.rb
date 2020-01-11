@@ -70,6 +70,18 @@ RSpec.describe "Character" do
 				expect(new_character.classes[0].level).to eq(1)
 				expect(new_character.classes[1].level).to eq(2)
 			end
+
+			it "levels up base class if passed class name is not valid" do
+				new_class = CharacterSheetGenerator::Class.new("new class", 10)
+				multi_class = CharacterSheetGenerator::Class.new("other class", 8)
+				new_character = CharacterSheetGenerator::Character.new("new character", new_class)
+
+				new_character.level_up(multi_class)
+				new_character.level_up("fail")
+				
+				expect(new_character.classes[0].level).to eq(2)
+				expect(new_character.classes[1].level).to eq(1)
+			end
 		end
 	end
 end
