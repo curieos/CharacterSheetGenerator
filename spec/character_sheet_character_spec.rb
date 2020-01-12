@@ -13,6 +13,10 @@ RSpec.describe "Character" do
 		expect(new_character.name).to eq(dummy_name)
 	end
 
+	it "has 0 experience on init" do
+		expect(dummy_character.experience).to eq(0)
+	end
+
 	describe '#class' do
 		it "exists" do
 			new_class = CharacterSheetGenerator::Class.new("new class", 10)
