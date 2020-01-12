@@ -1,6 +1,7 @@
 class CharacterSheetGenerator::CLI
-	def initialize
+	def initialize(url = "http://www.dnd5eapi.co/api/")
 		@characters = []
+		@classes = CharacterSheetGenerator::Classes.new(url)
 	end
 
 	def call
