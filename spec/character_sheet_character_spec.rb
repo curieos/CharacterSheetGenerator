@@ -30,7 +30,7 @@ RSpec.describe "Character" do
 		expect(dummy_character.experience).to eq(xp + xp2)
 	end
 
-	describe '#class' do
+	describe "#class" do
 		it "exists" do
 			new_class = CharacterSheetGenerator::Class.new("new class", 10)
 			new_character = CharacterSheetGenerator::Character.new("new character", new_class, 5)
@@ -39,9 +39,13 @@ RSpec.describe "Character" do
 		end
 	end
 
-	describe 'hit_points' do
-		it 'has a starting hp' do
+	describe "#hit_points" do
+		it "has a starting hp" do
 			expect(dummy_character.hit_points).to eq(5)
+		end
+
+		it "has #current_hp" do
+			expect(dummy_character.current_hp).to eq(5)
 		end
 	end
 
