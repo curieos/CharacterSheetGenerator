@@ -45,7 +45,7 @@ RSpec.describe "Character" do
 		end
 
 		it "has #current_hp" do
-			expect(dummy_character.current_hp).to eq(5)
+			expect(dummy_character.current_hp).to eq (5)
 		end
 	end
 
@@ -108,6 +108,15 @@ RSpec.describe "Character" do
 				
 				expect(new_character.classes[0].level).to eq(2)
 				expect(new_character.classes[1].level).to eq(1)
+			end
+
+			it "increases health on level up" do
+				new_class = CharacterSheetGenerator::Class.new("new class", 10)
+				new_character = CharacterSheetGenerator::Character.new("new character", new_class, 5)
+
+				new_character.level_up(_class: nil, _additional_hp: 5)
+				
+				expect(new_character.hit_points).to eq(10)
 			end
 		end
 	end

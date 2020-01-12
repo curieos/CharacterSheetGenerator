@@ -23,7 +23,7 @@ class CharacterSheetGenerator::Character
 		level
 	end
 
-	def level_up(_class: nil)
+	def level_up(_class: nil, _additional_hp: 0)
 		if _class.is_a?(String)
 			found_class = @classes.find{ |i| i.name == _class }
 			found_class.level_up() if found_class
@@ -31,5 +31,6 @@ class CharacterSheetGenerator::Character
 		end
 		@classes << _class if _class.is_a?(CharacterSheetGenerator::Class)
 		@classes[0].level_up() if _class == nil
+		@hit_points += _additional_hp
 	end
 end
