@@ -9,8 +9,8 @@ class CharacterSheetGenerator::Character
 		@experience = 0
 	end
 
-	def gain_experience(xp)
-		@experience += xp
+	def gain_experience(_xp)
+		@experience += _xp
 	end
 
 	def level
