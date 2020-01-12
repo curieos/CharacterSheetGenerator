@@ -1,5 +1,5 @@
 class CharacterSheetGenerator::Character
-	attr_reader :name, :classes
+	attr_reader :name, :race, :classes
 
 	def initialize(_name, _class)
 		@name = _name
@@ -15,7 +15,7 @@ class CharacterSheetGenerator::Character
 		level
 	end
 
-	def level_up(_class = nil)
+	def level_up(_class: nil)
 		if _class.is_a?(String)
 			found_class = @classes.find{ |i| i.name == _class }
 			found_class.level_up() if found_class

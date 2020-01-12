@@ -37,7 +37,7 @@ RSpec.describe "Character" do
 				new_character = CharacterSheetGenerator::Character.new("new character", new_class)
 
 				new_character.level_up()
-				new_character.level_up(multi_class)
+				new_character.level_up(_class: multi_class)
 			end
 
 			it "levels up the existing class" do
@@ -54,7 +54,7 @@ RSpec.describe "Character" do
 				multi_class = CharacterSheetGenerator::Class.new("other class", 8)
 				new_character = CharacterSheetGenerator::Character.new("new character", new_class)
 
-				new_character.level_up(multi_class)
+				new_character.level_up(_class: multi_class)
 				
 				expect(new_character.classes).to include(multi_class)
 			end
@@ -64,8 +64,8 @@ RSpec.describe "Character" do
 				multi_class = CharacterSheetGenerator::Class.new("other class", 8)
 				new_character = CharacterSheetGenerator::Character.new("new character", new_class)
 
-				new_character.level_up(multi_class)
-				new_character.level_up("other class")
+				new_character.level_up(_class: multi_class)
+				new_character.level_up(_class: "other class")
 				
 				expect(new_character.classes[0].level).to eq(1)
 				expect(new_character.classes[1].level).to eq(2)
@@ -76,8 +76,8 @@ RSpec.describe "Character" do
 				multi_class = CharacterSheetGenerator::Class.new("other class", 8)
 				new_character = CharacterSheetGenerator::Character.new("new character", new_class)
 
-				new_character.level_up(multi_class)
-				new_character.level_up("fail")
+				new_character.level_up(_class: multi_class)
+				new_character.level_up(_class: "fail")
 				
 				expect(new_character.classes[0].level).to eq(2)
 				expect(new_character.classes[1].level).to eq(1)
