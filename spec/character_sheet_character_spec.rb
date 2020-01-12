@@ -17,6 +17,19 @@ RSpec.describe "Character" do
 		expect(dummy_character.experience).to eq(0)
 	end
 
+	it "can gain experience" do 
+		xp = 100
+		xp2 = 1000
+
+		dummy_character.gain_experience(xp)
+
+		expect(dummy_character.experience).to eq(xp)
+
+		dummy_character.gain_experience(xp2)
+
+		expect(dummy_character.experience).to eq(xp + xp2)
+	end
+
 	describe '#class' do
 		it "exists" do
 			new_class = CharacterSheetGenerator::Class.new("new class", 10)

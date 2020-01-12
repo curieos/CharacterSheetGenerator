@@ -5,8 +5,12 @@ class CharacterSheetGenerator::Character
 		@name = _name
 		@classes = []
 		@classes << _class
-		
+
 		@experience = 0
+	end
+
+	def gain_experience(xp)
+		@experience += xp
 	end
 
 	def level
