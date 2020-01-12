@@ -1,11 +1,12 @@
 class CharacterSheetGenerator::Character
-	attr_reader :name, :race, :classes, :experience
+	attr_reader :name, :race, :classes, :hit_points, :experience
 
-	def initialize(_name, _class)
+	def initialize(_name, _class, _hp)
 		@name = _name
 		@classes = []
 		@classes << _class
 
+		@hit_points = _hp
 		@experience = 0
 	end
 

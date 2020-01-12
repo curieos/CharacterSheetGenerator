@@ -1,6 +1,6 @@
 RSpec.describe "Character" do
 	let(:dummy_class) { CharacterSheetGenerator::Class.new("Dummy Class", 10) }
-	let(:dummy_character) { CharacterSheetGenerator::Character.new("Dummy Name", dummy_class) }
+	let(:dummy_character) { CharacterSheetGenerator::Character.new("Dummy Name", dummy_class, 5) }
 
 	it "exists" do
 		expect(dummy_character).to_not be_nil
@@ -8,7 +8,7 @@ RSpec.describe "Character" do
 
 	it "has a name" do
 		dummy_name = "Tim"
-		new_character = CharacterSheetGenerator::Character.new(dummy_name, dummy_class)
+		new_character = CharacterSheetGenerator::Character.new(dummy_name, dummy_class, 5)
 
 		expect(new_character.name).to eq(dummy_name)
 	end
@@ -33,16 +33,22 @@ RSpec.describe "Character" do
 	describe '#class' do
 		it "exists" do
 			new_class = CharacterSheetGenerator::Class.new("new class", 10)
-			new_character = CharacterSheetGenerator::Character.new("new character", new_class)
+			new_character = CharacterSheetGenerator::Character.new("new character", new_class, 5)
 
 			expect(new_character.classes).to include(new_class)
+		end
+	end
+
+	describe 'hit_points' do
+		it 'has a starting hp' do
+			expect(dummy_character.hit_points).to eq(5)
 		end
 	end
 
 	describe "level methods" do
 		it "has a #level method that totals class levels" do
 			new_class = CharacterSheetGenerator::Class.new("new class", 10)
-			new_character = CharacterSheetGenerator::Character.new("new character", new_class)
+			new_character = CharacterSheetGenerator::Character.new("new character", new_class, 5)
 
 			expect(new_character.level).to eq(1)
 		end
@@ -51,7 +57,7 @@ RSpec.describe "Character" do
 			it "takes in an optional class" do
 				new_class = CharacterSheetGenerator::Class.new("new class", 10)
 				multi_class = CharacterSheetGenerator::Class.new("other class", 8)
-				new_character = CharacterSheetGenerator::Character.new("new character", new_class)
+				new_character = CharacterSheetGenerator::Character.new("new character", new_class, 5)
 
 				new_character.level_up()
 				new_character.level_up(_class: multi_class)
@@ -59,7 +65,7 @@ RSpec.describe "Character" do
 
 			it "levels up the existing class" do
 				new_class = CharacterSheetGenerator::Class.new("new class", 10)
-				new_character = CharacterSheetGenerator::Character.new("new character", new_class)
+				new_character = CharacterSheetGenerator::Character.new("new character", new_class, 5)
 				
 				new_character.level_up()
 
@@ -69,7 +75,7 @@ RSpec.describe "Character" do
 			it "adds a new class to the list" do
 				new_class = CharacterSheetGenerator::Class.new("new class", 10)
 				multi_class = CharacterSheetGenerator::Class.new("other class", 8)
-				new_character = CharacterSheetGenerator::Character.new("new character", new_class)
+				new_character = CharacterSheetGenerator::Character.new("new character", new_class, 5)
 
 				new_character.level_up(_class: multi_class)
 				
@@ -79,7 +85,7 @@ RSpec.describe "Character" do
 			it "levels up existing class if a class name is passed" do
 				new_class = CharacterSheetGenerator::Class.new("new class", 10)
 				multi_class = CharacterSheetGenerator::Class.new("other class", 8)
-				new_character = CharacterSheetGenerator::Character.new("new character", new_class)
+				new_character = CharacterSheetGenerator::Character.new("new character", new_class, 5)
 
 				new_character.level_up(_class: multi_class)
 				new_character.level_up(_class: "other class")
@@ -91,7 +97,7 @@ RSpec.describe "Character" do
 			it "levels up base class if passed class name is not valid" do
 				new_class = CharacterSheetGenerator::Class.new("new class", 10)
 				multi_class = CharacterSheetGenerator::Class.new("other class", 8)
-				new_character = CharacterSheetGenerator::Character.new("new character", new_class)
+				new_character = CharacterSheetGenerator::Character.new("new character", new_class, 5)
 
 				new_character.level_up(_class: multi_class)
 				new_character.level_up(_class: "fail")
