@@ -16,6 +16,10 @@ class CharacterSheetGenerator::Character
 		@current_hp + temp_hp
 	end
 
+	def heal(amount)
+		@current_hp += amount
+	end
+
 	def take_damage(amount)
 		@current_hp -= amount
 		@current_hp = 0 if @current_hp < 0
