@@ -1,5 +1,5 @@
 class CharacterSheetGenerator::Character
-	attr_reader :name, :race, :classes, :hit_points, :current_hp, :experience
+	attr_reader :name, :race, :classes, :hit_points, :temp_hp, :experience
 
 	def initialize(_name, _class, _hp)
 		@name = _name
@@ -8,7 +8,12 @@ class CharacterSheetGenerator::Character
 
 		@hit_points = _hp
 		@current_hp = @hit_points
+		@temp_hp = 0
 		@experience = 0
+	end
+
+	def current_hp
+		@current_hp + temp_hp
 	end
 
 	def gain_experience(_xp)

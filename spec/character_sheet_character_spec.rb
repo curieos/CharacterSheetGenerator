@@ -44,9 +44,14 @@ RSpec.describe "Character" do
 			expect(dummy_character.hit_points).to eq(5)
 		end
 
-		it "has #current_hp" do
+		it "has a #current_hp method" do
 			expect(dummy_character.current_hp).to eq (5)
 		end
+
+		it "has #temp_hp" do
+			expect(dummy_character.temp_hp).to_not be_nil
+		end
+
 	end
 
 	describe "level methods" do
