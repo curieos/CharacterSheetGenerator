@@ -18,6 +18,7 @@ class CharacterSheetGenerator::Character
 
 	def heal(amount)
 		@current_hp += amount
+		@current_hp = @hit_points if @current_hp > @hit_points
 	end
 
 	def take_damage(amount)
