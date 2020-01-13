@@ -16,6 +16,10 @@ class CharacterSheetGenerator::Character
 		@current_hp + temp_hp
 	end
 
+	def gain_temp_hp(amount)
+		@temp_hp = amount
+	end
+
 	def gain_experience(_xp)
 		@experience += _xp
 	end

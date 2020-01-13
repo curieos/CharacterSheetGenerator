@@ -52,6 +52,14 @@ RSpec.describe "Character" do
 			expect(dummy_character.temp_hp).to_not be_nil
 		end
 
+		it "can gain temporary hp" do
+			new_class = CharacterSheetGenerator::Class.new("new class", 10)
+			new_character = CharacterSheetGenerator::Character.new("new character", new_class, 5)
+
+			new_character.gain_temp_hp(5)
+
+			expect(new_character.current_hp).to eq(10)
+		end
 	end
 
 	describe "level methods" do
