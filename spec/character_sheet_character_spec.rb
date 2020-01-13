@@ -57,6 +57,15 @@ RSpec.describe "Character" do
 			expect(new_character.current_hp).to eq(2)
 		end
 
+		it "can't drop lower than 0 hp" do
+			new_class = CharacterSheetGenerator::Class.new("new class", 10)
+			new_character = CharacterSheetGenerator::Character.new("new character", new_class, 5)
+
+			new_character.take_damage(8)
+
+			expect(new_character.current_hp).to eq(0)
+		end
+
 		it "has #temp_hp" do
 			expect(dummy_character.temp_hp).to_not be_nil
 		end
