@@ -1,7 +1,7 @@
 class CharacterSheetGenerator::Character
-	attr_reader :name, :race, :classes, :hit_points, :temp_hp, :experience
+	attr_reader :name, :race, :classes, :hit_points, :temp_hp, :experience, :alignment, :background, :personality_traits, :ideals, :bonds, :flaws
 
-	def initialize(_name, _class, _hp)
+	def initialize(_name, _class, _hp, _alignment = "", _background = "", _personality_traits = "", _ideals = "", _bonds = "", _flaws = "")
 		@name = _name
 		@classes = []
 		@classes << _class
@@ -10,6 +10,13 @@ class CharacterSheetGenerator::Character
 		@current_hp = @hit_points
 		@temp_hp = 0
 		@experience = 0
+
+		@alignment = _alignment
+		@background = _background
+		@personality_traits = _personality_traits
+		@ideals = _ideals
+		@bonds = _bonds
+		@flaws = _flaws
 	end
 
 	def current_hp

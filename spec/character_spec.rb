@@ -30,6 +30,30 @@ RSpec.describe "Character" do
 		expect(dummy_character.experience).to eq(xp + xp2)
 	end
 
+	it "has a background" do
+		expect(dummy_character.background).to_not be_nil
+	end
+
+	it "has an alignment" do
+		expect(dummy_character.alignment).to_not be_nil
+	end
+
+	it "has personality traits" do
+		expect(dummy_character.personality_traits).to_not be_nil
+	end
+
+	it "has ideals" do
+		expect(dummy_character.ideals).to_not be_nil
+	end
+
+	it "has bonds" do
+		expect(dummy_character.bonds).to_not be_nil
+	end
+
+	it "has flaws" do
+		expect(dummy_character.flaws).to_not be_nil
+	end
+
 	describe "#class" do
 		it "exists" do
 			new_class = CharacterSheetGenerator::Class.new("new class", 10)
