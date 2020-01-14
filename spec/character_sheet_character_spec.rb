@@ -104,6 +104,22 @@ RSpec.describe "Character" do
 
 			expect(new_character.current_hp).to eq(10)
 		end
+
+		it "looses temporary hp before real hp" do
+			new_class = CharacterSheetGenerator::Class.new("new class", 10)
+			new_character = CharacterSheetGenerator::Character.new("new character", new_class, 5)
+
+			new_character.gain_temp_hp(5)
+			new_character.take_damage(3)
+
+			expect(new_character.current_hp).to eq(7)
+			expect(new_character.temp_hp).to eq(2)
+
+			new_character.take_damage(3)
+
+			expect(new_character.temp_hp).to eq(0)
+			expect(new_character.current_hp).to eq(4)
+		end
 	end
 
 	describe "level methods" do
