@@ -16,20 +16,20 @@ class CharacterSheetGenerator::Character
 		@current_hp + temp_hp
 	end
 
-	def heal(amount)
-		@current_hp += amount
+	def heal(_amount)
+		@current_hp += _amount
 		@current_hp = @hit_points if @current_hp > @hit_points
 	end
 
-	def take_damage(amount)
-		@current_hp -= amount
+	def take_damage(_amount)
+		@current_hp -= _amount
 		leftover = @current_hp
 		@current_hp = 0 if @current_hp < 0
 		leftover
 	end
 
-	def gain_temp_hp(amount)
-		@temp_hp = amount
+	def gain_temp_hp(_amount)
+		@temp_hp = _amount
 	end
 
 	def gain_experience(_xp)
