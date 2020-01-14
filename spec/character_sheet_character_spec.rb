@@ -66,6 +66,13 @@ RSpec.describe "Character" do
 			expect(new_character.current_hp).to eq(0)
 		end
 
+		it "returns hp after damage" do
+			new_class = CharacterSheetGenerator::Class.new("new class", 10)
+			new_character = CharacterSheetGenerator::Character.new("new character", new_class, 5)
+
+			expect(new_character.take_damage(8)).to eq(-3)
+		end
+
 		it "can gain hp" do
 			new_class = CharacterSheetGenerator::Class.new("new class", 10)
 			new_character = CharacterSheetGenerator::Character.new("new character", new_class, 5)

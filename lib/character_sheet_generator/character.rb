@@ -23,7 +23,9 @@ class CharacterSheetGenerator::Character
 
 	def take_damage(amount)
 		@current_hp -= amount
+		leftover = @current_hp
 		@current_hp = 0 if @current_hp < 0
+		leftover
 	end
 
 	def gain_temp_hp(amount)
