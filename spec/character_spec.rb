@@ -1,16 +1,13 @@
 RSpec.describe "Character" do
 	let(:dummy_class) { CharacterSheetGenerator::Class.new("Dummy Class", 10) }
-	let(:dummy_character) { CharacterSheetGenerator::Character.new("Dummy Name", dummy_class, 5) }
+	let(:dummy_character) { CharacterSheetGenerator::Character.new("Dummy Name", dummy_class, 5, "Lawful Good", "Hermit") }
 
 	it "exists" do
 		expect(dummy_character).to_not be_nil
 	end
 
 	it "has a name" do
-		dummy_name = "Tim"
-		new_character = CharacterSheetGenerator::Character.new(dummy_name, dummy_class, 5)
-
-		expect(new_character.name).to eq(dummy_name)
+		expect(dummy_character.name).to eq("Dummy Name")
 	end
 
 	it "has 0 experience on init" do
@@ -56,10 +53,7 @@ RSpec.describe "Character" do
 
 	describe "#class" do
 		it "exists" do
-			new_class = CharacterSheetGenerator::Class.new("new class", 10)
-			new_character = CharacterSheetGenerator::Character.new("new character", new_class, 5)
-
-			expect(new_character.classes).to include(new_class)
+			expect(dummy_character.classes).to include(dummy_class)
 		end
 	end
 
@@ -72,48 +66,33 @@ RSpec.describe "Character" do
 			expect(dummy_character.current_hp).to eq (5)
 		end
 
-		it "can take damage" do 
-			new_class = CharacterSheetGenerator::Class.new("new class", 10)
-			new_character = CharacterSheetGenerator::Character.new("new character", new_class, 5)
+		it "can take damage" do
+			dummy_character.take_damage(3)
 
-			new_character.take_damage(3)
-
-			expect(new_character.current_hp).to eq(2)
+			expect(dummy_character.current_hp).to eq(2)
 		end
 
 		it "can't drop lower than 0 hp" do
-			new_class = CharacterSheetGenerator::Class.new("new class", 10)
-			new_character = CharacterSheetGenerator::Character.new("new character", new_class, 5)
+			dummy_character.take_damage(8)
 
-			new_character.take_damage(8)
-
-			expect(new_character.current_hp).to eq(0)
+			expect(dummy_character.current_hp).to eq(0)
 		end
 
 		it "returns hp after damage" do
-			new_class = CharacterSheetGenerator::Class.new("new class", 10)
-			new_character = CharacterSheetGenerator::Character.new("new character", new_class, 5)
-
-			expect(new_character.take_damage(8)).to eq(-3)
+			expect(dummy_character.take_damage(8)).to eq(-3)
 		end
 
 		it "can gain hp" do
-			new_class = CharacterSheetGenerator::Class.new("new class", 10)
-			new_character = CharacterSheetGenerator::Character.new("new character", new_class, 5)
+			dummy_character.take_damage(3)
+			dummy_character.heal(2)
 
-			new_character.take_damage(3)
-			new_character.heal(2)
-
-			expect(new_character.current_hp).to eq(4)
+			expect(dummy_character.current_hp).to eq(4)
 		end
 
-		it "can't gain more than the max hp" do 
-			new_class = CharacterSheetGenerator::Class.new("new class", 10)
-			new_character = CharacterSheetGenerator::Character.new("new character", new_class, 5)
+		it "can't gain more than the max hp" do
+			dummy_character.heal(3)
 
-			new_character.heal(3)
-
-			expect(new_character.current_hp).to eq(5)
+			expect(dummy_character.current_hp).to eq(5)
 		end
 
 		it "has #temp_hp" do
@@ -121,99 +100,76 @@ RSpec.describe "Character" do
 		end
 
 		it "can gain temporary hp" do
-			new_class = CharacterSheetGenerator::Class.new("new class", 10)
-			new_character = CharacterSheetGenerator::Character.new("new character", new_class, 5)
+			dummy_character.gain_temp_hp(5)
 
-			new_character.gain_temp_hp(5)
-
-			expect(new_character.current_hp).to eq(10)
+			expect(dummy_character.current_hp).to eq(10)
 		end
 
 		it "looses temporary hp before real hp" do
-			new_class = CharacterSheetGenerator::Class.new("new class", 10)
-			new_character = CharacterSheetGenerator::Character.new("new character", new_class, 5)
+			dummy_character.gain_temp_hp(5)
+			dummy_character.take_damage(3)
 
-			new_character.gain_temp_hp(5)
-			new_character.take_damage(3)
+			expect(dummy_character.current_hp).to eq(7)
+			expect(dummy_character.temp_hp).to eq(2)
 
-			expect(new_character.current_hp).to eq(7)
-			expect(new_character.temp_hp).to eq(2)
+			dummy_character.take_damage(3)
 
-			new_character.take_damage(3)
-
-			expect(new_character.temp_hp).to eq(0)
-			expect(new_character.current_hp).to eq(4)
+			expect(dummy_character.temp_hp).to eq(0)
+			expect(dummy_character.current_hp).to eq(4)
 		end
 	end
 
 	describe "level methods" do
 		it "has a #level method that totals class levels" do
-			new_class = CharacterSheetGenerator::Class.new("new class", 10)
-			new_character = CharacterSheetGenerator::Character.new("new character", new_class, 5)
-
-			expect(new_character.level).to eq(1)
+			expect(dummy_character.level).to eq(1)
 		end
 
 		describe "#level_up" do
 			it "takes in an optional class" do
-				new_class = CharacterSheetGenerator::Class.new("new class", 10)
 				multi_class = CharacterSheetGenerator::Class.new("other class", 8)
-				new_character = CharacterSheetGenerator::Character.new("new character", new_class, 5)
 
-				new_character.level_up()
-				new_character.level_up(_class: multi_class)
+				dummy_character.level_up()
+				dummy_character.level_up(_class: multi_class)
 			end
 
 			it "levels up the existing class" do
-				new_class = CharacterSheetGenerator::Class.new("new class", 10)
-				new_character = CharacterSheetGenerator::Character.new("new character", new_class, 5)
-				
-				new_character.level_up()
+				dummy_character.level_up()
 
-				expect(new_character.level).to eq(2)
+				expect(dummy_character.level).to eq(2)
 			end
 
 			it "adds a new class to the list" do
-				new_class = CharacterSheetGenerator::Class.new("new class", 10)
 				multi_class = CharacterSheetGenerator::Class.new("other class", 8)
-				new_character = CharacterSheetGenerator::Character.new("new character", new_class, 5)
 
-				new_character.level_up(_class: multi_class)
+				dummy_character.level_up(_class: multi_class)
 				
-				expect(new_character.classes).to include(multi_class)
+				expect(dummy_character.classes).to include(multi_class)
 			end
 
 			it "levels up existing class if a class name is passed" do
-				new_class = CharacterSheetGenerator::Class.new("new class", 10)
 				multi_class = CharacterSheetGenerator::Class.new("other class", 8)
-				new_character = CharacterSheetGenerator::Character.new("new character", new_class, 5)
 
-				new_character.level_up(_class: multi_class)
-				new_character.level_up(_class: "other class")
+				dummy_character.level_up(_class: multi_class)
+				dummy_character.level_up(_class: "other class")
 				
-				expect(new_character.classes[0].level).to eq(1)
-				expect(new_character.classes[1].level).to eq(2)
+				expect(dummy_character.classes[0].level).to eq(1)
+				expect(dummy_character.classes[1].level).to eq(2)
 			end
 
 			it "levels up base class if passed class name is not valid" do
-				new_class = CharacterSheetGenerator::Class.new("new class", 10)
 				multi_class = CharacterSheetGenerator::Class.new("other class", 8)
-				new_character = CharacterSheetGenerator::Character.new("new character", new_class, 5)
 
-				new_character.level_up(_class: multi_class)
-				new_character.level_up(_class: "fail")
+				dummy_character.level_up(_class: multi_class)
+				dummy_character.level_up(_class: "fail")
 				
-				expect(new_character.classes[0].level).to eq(2)
-				expect(new_character.classes[1].level).to eq(1)
+				expect(dummy_character.classes[0].level).to eq(2)
+				expect(dummy_character.classes[1].level).to eq(1)
 			end
 
 			it "increases health on level up" do
-				new_class = CharacterSheetGenerator::Class.new("new class", 10)
-				new_character = CharacterSheetGenerator::Character.new("new character", new_class, 5)
-
-				new_character.level_up(_class: nil, _additional_hp: 5)
+				dummy_character.level_up(_class: nil, _additional_hp: 5)
 				
-				expect(new_character.hit_points).to eq(10)
+				expect(dummy_character.hit_points).to eq(10)
 			end
 		end
 	end
