@@ -16,4 +16,8 @@ RSpec.describe "Ability" do
 	it "has a bonus score" do
 		expect(dummy_ability.bonus_score).to eq(2)
 	end
+
+	it "has method #score that returns the total score" do
+		expect(dummy_ability.score).to eq(15)
+	end
 end

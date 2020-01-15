@@ -6,4 +6,8 @@ class CharacterSheetGenerator::Ability
 		@base_score = _base
 		@bonus_score = _bonus
 	end
+
+	def score
+		@base_score + @bonus_score
+	end
 end
