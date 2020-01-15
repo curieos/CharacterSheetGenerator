@@ -3,5 +3,6 @@ class CharacterSheetGenerator::Ability
 
 	def initialize(_name, _base, _bonus)
 		@name = _name
+		@base_score = _base
 	end
 end

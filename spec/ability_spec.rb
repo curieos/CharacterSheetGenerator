@@ -8,4 +8,8 @@ RSpec.describe "Ability" do
 	it "has a name" do
 		expect(dummy_ability.name).to eq("Strength")
 	end
+
+	it "has a base score" do
+		expect(dummy_ability.base_score).to eq(13)
+	end
 end
