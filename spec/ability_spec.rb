@@ -12,4 +12,8 @@ RSpec.describe "Ability" do
 	it "has a base score" do
 		expect(dummy_ability.base_score).to eq(13)
 	end
+
+	it "has a bonus score" do
+		expect(dummy_ability.bonus_score).to eq(2)
+	end
 end
