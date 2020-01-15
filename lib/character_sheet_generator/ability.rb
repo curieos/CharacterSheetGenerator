@@ -10,4 +10,8 @@ class CharacterSheetGenerator::Ability
 	def score
 		@base_score + @bonus_score
 	end
+
+	def modifier
+		score()/2 - 5
+	end
 end

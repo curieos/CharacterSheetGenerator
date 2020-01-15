@@ -20,4 +20,14 @@ RSpec.describe "Ability" do
 	it "has method #score that returns the total score" do
 		expect(dummy_ability.score).to eq(15)
 	end
+
+	it "has method #modifier that calculates the ability modifier" do
+		expect(dummy_ability.modifier).to eq(2)
+	end
+
+	it "#modifier is not hard-coded" do
+		new_ability = CharacterSheetGenerator::Ability.new("Strength", 2, 0)
+
+		expect(new_ability.modifier).to eq(-4)
+	end
 end
