@@ -61,7 +61,7 @@ class CharacterSheetGenerator::CLI
 		puts ""
 		puts "Enter a name for your character:"
 		name = gets.strip
-		character = CharacterSheetGenerator::Character.new(name, CharacterSheetGenerator::Class.new("Bard", 6))
+		character = CharacterSheetGenerator::Character.new(name, CharacterSheetGenerator::Class.new("Bard", 6), 4, "", "")
 		@characters << character
 		puts ""
 	end
