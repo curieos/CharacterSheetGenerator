@@ -76,7 +76,7 @@ RSpec.describe "Character" do
 	end
 
 	describe "#classes" do
-		it "exists" do
+		it "has a class" do
 			expect(dummy_character.classes).to include(dummy_class)
 		end
 	end
