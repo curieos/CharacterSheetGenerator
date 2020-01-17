@@ -37,7 +37,8 @@ class CharacterSheetGenerator::Character
 	##
 	# Takes in the ability's name of type String and returns the ability's modifier (or nil if it's not found)
 	def ability_modifier(_ability)
-		score = @abilities.find { |ability| ability.name == _ability }.modifier
+		modifier = nil
+		modifier = @abilities.find { |ability| ability.name == _ability }.modifier if @abilities.find { |ability| ability.name == _ability }
 	end
 
 	##
