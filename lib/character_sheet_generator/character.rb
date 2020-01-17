@@ -28,6 +28,12 @@ class CharacterSheetGenerator::Character
 	end
 
 	##
+	# Calculates a proficiency bonus based on the character's level
+	def proficiency_bonus
+		(level()+3)/4 + 1
+	end
+
+	##
 	# Returns the current hp (including temporary hp).
 	def current_hp
 		@current_hp + temp_hp

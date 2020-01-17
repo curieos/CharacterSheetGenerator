@@ -12,6 +12,28 @@ RSpec.describe "Character" do
 		expect(dummy_character.name).to eq("Dummy Name")
 	end
 
+	it "has a proficiency bonus" do
+		expect(dummy_character.proficiency_bonus).to eq(2)
+	end
+
+	it "#proficiency_bonus is not hard-coded and calculated correctly" do
+		dummy_character.level_up()
+
+		expect(dummy_character.proficiency_bonus).to eq(2)
+
+		dummy_character.level_up()
+
+		expect(dummy_character.proficiency_bonus).to eq(2)
+		
+		dummy_character.level_up()
+
+		expect(dummy_character.proficiency_bonus).to eq(2)
+		
+		dummy_character.level_up()
+
+		expect(dummy_character.proficiency_bonus).to eq(3)
+	end
+
 	it "has 0 experience on init" do
 		expect(dummy_character.experience).to eq(0)
 	end
@@ -53,7 +75,7 @@ RSpec.describe "Character" do
 		expect(dummy_character.flaws).to_not be_nil
 	end
 
-	describe "#class" do
+	describe "#classes" do
 		it "exists" do
 			expect(dummy_character.classes).to include(dummy_class)
 		end
