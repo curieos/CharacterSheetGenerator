@@ -28,7 +28,8 @@ class CharacterSheetGenerator::Character
 	end
 
 	def ability_score(_ability)
-		score = abilities.find { |ability| ability.name == _ability }.score
+		score = nil
+		score = @abilities.find { |ability| ability.name == _ability }.score if @abilities.find { |ability| ability.name == _ability }
 	end
 
 	##

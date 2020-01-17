@@ -90,6 +90,10 @@ RSpec.describe "Character" do
 			expect(dummy_character.ability_score("STR")).to eq(17)
 		end
 
+		it "#ability_score returns nil if not found" do
+			expect(dummy_character.ability_score("fake")).to be_nil
+		end
+
 		it "has method #skill_bonus that returns the skill bonus" do
 			expect(dummy_character.skill_bonus("Athletics")).to eq(5)
 		end
