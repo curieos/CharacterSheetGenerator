@@ -1,8 +1,9 @@
 RSpec.describe "Character" do
 	let(:dummy_abilites) { [CharacterSheetGenerator::Ability.new("STR", 15, 2, {Athletics: 1}),
 		CharacterSheetGenerator::Ability.new("DEX", 13, 0, {Acrobatics: 0})] }
-	let(:dummy_class) { CharacterSheetGenerator::Class.new("Dummy Class", 10) }
-	let(:dummy_character) { CharacterSheetGenerator::Character.new("Dummy Name", dummy_class, dummy_abilites,  5, "Lawful Good", "Hermit") }
+	let(:dummy_race) {CharacterSheetGenerator::Race.new("Elf")}
+	let(:dummy_class) { CharacterSheetGenerator::Class.new("Barbarian", 10) }
+	let(:dummy_character) { CharacterSheetGenerator::Character.new("Dummy Name", dummy_race, dummy_class, dummy_abilites,  5, "Lawful Good", "Hermit") }
 
 	it "exists" do
 		expect(dummy_character).to_not be_nil
@@ -77,6 +78,12 @@ RSpec.describe "Character" do
 
 	it "has flaws" do
 		expect(dummy_character.flaws).to_not be_nil
+	end
+
+	describe "#race" do
+		it "has a race" do
+			expect(dummy_character.race).to eq(dummy_race)
+		end
 	end
 
 	describe "#classes" do
