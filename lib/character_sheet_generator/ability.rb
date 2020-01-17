@@ -1,10 +1,11 @@
 class CharacterSheetGenerator::Ability
-	attr_reader :name, :base_score, :bonus_score
+	attr_reader :name, :base_score, :bonus_score, :skills
 
-	def initialize(_name, _base, _bonus)
+	def initialize(_name, _base, _bonus, _skills)
 		@name = _name
 		@base_score = _base
 		@bonus_score = _bonus
+		@skills = _skills
 	end
 
 	def score

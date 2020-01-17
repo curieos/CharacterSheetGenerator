@@ -1,5 +1,5 @@
 RSpec.describe "Ability" do
-	let(:dummy_ability) { CharacterSheetGenerator::Ability.new("Strength", 13, 2) }
+	let(:dummy_ability) { CharacterSheetGenerator::Ability.new("Strength", 13, 2, [{Athletics: 1}]) }
 
 	it "exists" do
 		expect(dummy_ability).to_not be_nil
@@ -26,8 +26,12 @@ RSpec.describe "Ability" do
 	end
 
 	it "#modifier is not hard-coded" do
-		new_ability = CharacterSheetGenerator::Ability.new("Strength", 2, 0)
+		new_ability = CharacterSheetGenerator::Ability.new("Strength", 2, 0, [{Athletics: 1}])
 
 		expect(new_ability.modifier).to eq(-4)
+	end
+
+	it "has skills" do
+		expect(dummy_ability.skills.length).to_not eq(0)
 	end
 end
