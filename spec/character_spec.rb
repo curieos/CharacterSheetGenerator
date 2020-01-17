@@ -1,10 +1,11 @@
 RSpec.describe "Character" do
+	let(:dummy_background) { CharacterSheetGenerator::Background.new("Archaeologist") }
 	let(:dummy_equipment) { [CharacterSheetGenerator::Equipment.new("Club")] }
 	let(:dummy_abilites) { [CharacterSheetGenerator::Ability.new("STR", 15, 2, {Athletics: 1}),
 		CharacterSheetGenerator::Ability.new("DEX", 13, 0, {Acrobatics: 0})] }
 	let(:dummy_class) { CharacterSheetGenerator::Class.new("Barbarian", 10) }
 	let(:dummy_race) {CharacterSheetGenerator::Race.new("Elf")}
-	let(:dummy_character) { CharacterSheetGenerator::Character.new("Dummy Name", dummy_race, dummy_class, dummy_abilites, dummy_equipment, 5, "Lawful Good", "Hermit") }
+	let(:dummy_character) { CharacterSheetGenerator::Character.new("Dummy Name", dummy_race, dummy_class, dummy_abilites, dummy_equipment, 5, "Lawful Good", dummy_background) }
 
 	it "exists" do
 		expect(dummy_character).to_not be_nil
@@ -58,7 +59,7 @@ RSpec.describe "Character" do
 	end
 
 	it "has a background" do
-		expect(dummy_character.background).to_not be_nil
+		expect(dummy_character.background).to eq(dummy_background)
 	end
 
 	it "has an alignment" do
