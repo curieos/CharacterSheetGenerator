@@ -117,7 +117,7 @@ class CharacterSheetGenerator::Character
 	# Takes an argument +_class+, which can either be a string or a class object (defaults to nil). If it passes a new class object, the character will add it to their list of classes. If it passes a string, it with either level up the class with name equal to the string if it exists, or it will level up the base class if the class is not found (or none is provided)
 	#
 	# Takes an argument +_additional_hp+, which is an int (defaults to 0). Adds this to hit point total.
-	def level_up(_class: nil, _additional_hp: 0)
+	def level_up(_class: nil, _additional_hp: 0, _feat: nil)
 		if _class.is_a?(String)
 			found_class = @classes.find{ |i| i.name == _class }
 			found_class.level_up() if found_class
@@ -125,6 +125,9 @@ class CharacterSheetGenerator::Character
 		end
 		@classes << _class if _class.is_a?(CharacterSheetGenerator::Class)
 		@classes[0].level_up() if _class == nil
+
+		@feats << _feat if _feat != nil
+		
 		@hit_points += _additional_hp
 	end
 end
