@@ -94,6 +94,10 @@ RSpec.describe "Character" do
 			expect(dummy_character.ability_score("fake")).to be_nil
 		end
 
+		it "has method #ability_modifier that returns the ability's modifier" do
+			expect(dummy_character.ability_modifier("STR")).to eq(3)
+		end
+
 		it "has method #skill_bonus that returns the skill bonus" do
 			expect(dummy_character.skill_bonus("Athletics")).to eq(5)
 		end
