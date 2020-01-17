@@ -5,16 +5,18 @@ class CharacterSheetGenerator::Character
 	attr_reader :name, :race, :classes, :abilities, :feats, :temp_hp, :experience, :alignment, :background, :personality_traits, :ideals, :bonds, :flaws
 
 	##
-	# Takes in the character's name, race, class, hp, alignment, and background.
+	# Takes in the character's name, race, class, abilities, equipment, hp, alignment, and background.
 	#
 	# Optionally takes personality traits, ideals, bonds, and flaws.
-	def initialize(_name, _race, _class, _abilities, _hp, _alignment, _background, _personality_traits = "", _ideals = "", _bonds = "", _flaws = "")
+	def initialize(_name, _race, _class, _abilities, _equipment, _hp, _alignment, _background, _personality_traits = "", _ideals = "", _bonds = "", _flaws = "")
 		@name = _name
 		@race = _race
 		@classes = []
 		@classes << _class
 		@abilities = _abilities
 		@feats = []
+
+		@equipment = _equipment
 
 		@hit_points = _hp
 		@current_hp = @hit_points
