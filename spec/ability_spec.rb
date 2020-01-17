@@ -35,11 +35,11 @@ RSpec.describe "Ability" do
 		expect(dummy_ability.skills.length).to_not eq(0)
 	end
 
-	it "has method #skill which takes in the proficency bonus and returns the skill modifier" do
+	it "has method #skill_bonus which takes in the proficency bonus and returns the skill modifier" do
 		expect(dummy_ability.skill_bonus("Athletics", 2)).to eq(4)
 	end
 
-	it "#skill returns nil if skill isn't found" do
+	it "#skill_bonus returns nil if skill isn't found" do
 		expect(dummy_ability.skill_bonus("fake_skill", 2)).to be_nil
 	end
 end
