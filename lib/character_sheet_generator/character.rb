@@ -2,7 +2,7 @@ class CharacterSheetGenerator::Character
 	##
 	# Total amount of hit points (not the current amount).
 	attr_reader :hit_points
-	attr_reader :name, :race, :classes, :abilities, :temp_hp, :experience, :alignment, :background, :personality_traits, :ideals, :bonds, :flaws
+	attr_reader :name, :race, :classes, :abilities, :feats, :temp_hp, :experience, :alignment, :background, :personality_traits, :ideals, :bonds, :flaws
 
 	##
 	# Takes in the character's name, race, class, hp, alignment, and background.
@@ -13,6 +13,7 @@ class CharacterSheetGenerator::Character
 		@classes = []
 		@classes << _class
 		@abilities = _abilities
+		@feats = []
 
 		@hit_points = _hp
 		@current_hp = @hit_points

@@ -34,6 +34,10 @@ RSpec.describe "Character" do
 		expect(dummy_character.proficiency_bonus).to eq(3)
 	end
 
+	it "has feats" do
+		expect(dummy_character.feats).to_not be_nil
+	end
+
 	it "has 0 experience on init" do
 		expect(dummy_character.experience).to eq(0)
 	end
