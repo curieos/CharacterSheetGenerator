@@ -86,6 +86,10 @@ RSpec.describe "Character" do
 			expect(dummy_character.abilities.length).to_not be_nil
 		end
 
+		it "has method #ability_score that returns the ability's score" do
+			expect(dummy_character.ability_score("STR")).to eq(17)
+		end
+
 		it "has method #skill that returns the skill bonus" do
 			expect(dummy_character.skill_bonus("Athletics")).to eq(5)
 		end

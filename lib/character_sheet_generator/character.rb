@@ -27,6 +27,10 @@ class CharacterSheetGenerator::Character
 		@flaws = _flaws
 	end
 
+	def ability_score(_ability)
+		score = abilities.find { |ability| ability.name == _ability }.score
+	end
+
 	##
 	# Takes in the skill's name of type String and returns the skill bonus (or nil if it's not found)
 	def skill_bonus(_skill)
