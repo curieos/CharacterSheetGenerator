@@ -85,6 +85,14 @@ RSpec.describe "Character" do
 		it "has abilities" do
 			expect(dummy_character.abilities.length).to_not be_nil
 		end
+
+		it "has method #skill that returns the skill bonus" do
+			expect(dummy_character.skill_bonus("Athletics")).to eq(5)
+		end
+
+		it "#skill returns nil if not found" do
+			expect(dummy_character.skill_bonus("fake skill")).to be_nil
+		end
 	end
 
 	describe "#hit_points" do

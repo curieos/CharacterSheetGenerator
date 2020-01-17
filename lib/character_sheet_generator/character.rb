@@ -28,6 +28,17 @@ class CharacterSheetGenerator::Character
 	end
 
 	##
+	# Takes in the skill's name of type String and returns the skill bonus (or nil if it's not found)
+	def skill_bonus(_skill)
+		bonus = nil
+		@abilities.each do |ability|
+			b = ability.skill_bonus(_skill, proficiency_bonus)
+			bonus = b if b != nil
+		end
+		bonus
+	end
+
+	##
 	# Calculates a proficiency bonus based on the character's level
 	def proficiency_bonus
 		(level()+3)/4 + 1
