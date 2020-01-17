@@ -15,4 +15,8 @@ class CharacterSheetGenerator::Ability
 	def modifier
 		score()/2 - 5
 	end
+
+	def skill(_skill, _proficency_bonus)
+		modifier() + @skills[_skill.to_sym]*_proficency_bonus if @skills[_skill.to_sym]
+	end
 end
