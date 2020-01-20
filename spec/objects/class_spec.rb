@@ -1,12 +1,12 @@
 RSpec.describe "Class" do
-	let(:dummy_class) { CharacterSheetGenerator::Class.new("Dummy Name", 10) }
+	let(:dummy_class) { CharacterSheetGenerator::Class.new("Bard", 6, ["Bardic Inspiration"]) }
 
 	it "exists" do
 		expect(dummy_class).to_not be_nil
 	end
 
 	it "has a name" do
-		expect(dummy_class.name).to eq("Dummy Name")
+		expect(dummy_class.name).to eq("Bard")
 	end
 
 	it "has a level" do
@@ -18,14 +18,16 @@ RSpec.describe "Class" do
 	end
 
 	it "has a hit die" do
-		expect(dummy_class.hit_die).to eq(10)
+		expect(dummy_class.hit_die).to eq(6)
+	end
+
+	it "has features" do
+		expect(dummy_class.features).to_not be_nil
 	end
 
 	it "has method #level_up that increases the level" do
-		new_class = CharacterSheetGenerator::Class.new("new class", 8)
+		dummy_class.level_up()
 
-		new_class.level_up()
-
-		expect(new_class.level).to eq(2)
+		expect(dummy_class.level).to eq(2)
 	end
 end

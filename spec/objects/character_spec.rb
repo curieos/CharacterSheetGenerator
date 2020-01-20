@@ -3,7 +3,7 @@ RSpec.describe "Character" do
 	let(:dummy_equipment) { [CharacterSheetGenerator::Equipment.new("Club")] }
 	let(:dummy_abilites) { [CharacterSheetGenerator::Ability.new("STR", 15, 2, {Athletics: 1}),
 		CharacterSheetGenerator::Ability.new("DEX", 13, 0, {Acrobatics: 0})] }
-	let(:dummy_class) { CharacterSheetGenerator::Class.new("Barbarian", 10) }
+	let(:dummy_class) { CharacterSheetGenerator::Class.new("Barbarian", 10, []) }
 	let(:dummy_race) {CharacterSheetGenerator::Race.new("Elf")}
 	let(:dummy_character) { CharacterSheetGenerator::Character.new("Dummy Name", dummy_race, dummy_class, dummy_abilites, dummy_equipment, 5, "Lawful Good", dummy_background) }
 
@@ -193,7 +193,7 @@ RSpec.describe "Character" do
 
 		describe "#level_up" do
 			it "takes in an optional class" do
-				multi_class = CharacterSheetGenerator::Class.new("other class", 8)
+				multi_class = CharacterSheetGenerator::Class.new("other class", 8, [])
 
 				dummy_character.level_up()
 				dummy_character.level_up(_class: multi_class)
@@ -206,7 +206,7 @@ RSpec.describe "Character" do
 			end
 
 			it "adds a new class to the list" do
-				multi_class = CharacterSheetGenerator::Class.new("other class", 8)
+				multi_class = CharacterSheetGenerator::Class.new("other class", 8, [])
 
 				dummy_character.level_up(_class: multi_class)
 				
@@ -214,7 +214,7 @@ RSpec.describe "Character" do
 			end
 
 			it "levels up existing class if a class name is passed" do
-				multi_class = CharacterSheetGenerator::Class.new("other class", 8)
+				multi_class = CharacterSheetGenerator::Class.new("other class", 8, [])
 
 				dummy_character.level_up(_class: multi_class)
 				dummy_character.level_up(_class: "other class")
@@ -224,7 +224,7 @@ RSpec.describe "Character" do
 			end
 
 			it "levels up base class if passed class name is not valid" do
-				multi_class = CharacterSheetGenerator::Class.new("other class", 8)
+				multi_class = CharacterSheetGenerator::Class.new("other class", 8, [])
 
 				dummy_character.level_up(_class: multi_class)
 				dummy_character.level_up(_class: "fail")
