@@ -1,5 +1,5 @@
 RSpec.describe "Class" do
-	let(:dummy_class) { CharacterSheetGenerator::Class.new("Bard", 6, ["Bardic Inspiration"]) }
+	let(:dummy_class) { CharacterSheetGenerator::Class.new("Bard", 6, [CharacterSheetGenerator::Feature.new("Bardic Inspiration")]) }
 
 	it "exists" do
 		expect(dummy_class).to_not be_nil
@@ -32,7 +32,7 @@ RSpec.describe "Class" do
 	end
 
 	it "has method #level_up that adds new class features" do
-		features = ["new feature"]
+		features = [CharacterSheetGenerator::Feature.new("Jack of all Trades")]
 		dummy_class.level_up(_features: features)
 
 		features.each do |feature|
