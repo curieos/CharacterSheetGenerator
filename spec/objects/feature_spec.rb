@@ -12,4 +12,8 @@ RSpec.describe "Feature" do
 	it "has a description" do
 		expect(dummy_feat.description).to eq("")
 	end
+
+	it "has a source" do
+		expect(dummy_feat.source).to be_nil
+	end
 end
