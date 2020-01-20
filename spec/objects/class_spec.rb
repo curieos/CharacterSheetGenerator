@@ -31,10 +31,12 @@ RSpec.describe "Class" do
 		expect(dummy_class.level).to eq(2)
 	end
 
-	it "has method #level_up that adds a new class feature" do
-		feature = "new feature"
-		dummy_class.level_up(_feature: feature)
+	it "has method #level_up that adds new class features" do
+		features = ["new feature"]
+		dummy_class.level_up(_features: features)
 
-		expect(dummy_class.features).to include(feature)
+		features.each do |feature|
+			expect(dummy_class.features).to include(feature)
+		end
 	end
 end

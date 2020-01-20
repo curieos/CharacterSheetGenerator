@@ -8,8 +8,11 @@ class CharacterSheetGenerator::Class
 		@features = _features
 	end
 
-	def level_up(_feature: nil)
-		@features << _feature if _feature != nil
+	def level_up(_features: nil)
+		_features.each do |feature|
+			@features << feature
+		end if _features != nil
+
 		@level += 1
 	end
 end
