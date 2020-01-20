@@ -1,4 +1,4 @@
-class CharacterSheetGenerator::Feat
+class CharacterSheetGenerator::Feature
 	attr_reader :name
 
 	def initialize(_name)

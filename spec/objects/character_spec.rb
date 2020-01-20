@@ -233,8 +233,8 @@ RSpec.describe "Character" do
 				expect(dummy_character.classes[1].level).to eq(1)
 			end
 
-			it "adds a feat if provided" do
-				new_feat = CharacterSheetGenerator::Feat.new("Athlete")
+			it "adds a feature if provided" do
+				new_feat = CharacterSheetGenerator::Feature.new("Athlete")
 				dummy_character.level_up(_feat: new_feat)
 
 				expect(dummy_character.feats).to include(new_feat)
