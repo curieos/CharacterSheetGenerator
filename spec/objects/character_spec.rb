@@ -234,7 +234,7 @@ RSpec.describe "Character" do
 			end
 
 			it "adds a feature if provided" do
-				new_feat = CharacterSheetGenerator::Feature.new("Athlete")
+				new_feat = CharacterSheetGenerator::Feature.new("Athlete", "")
 				dummy_character.level_up(_feat: new_feat)
 
 				expect(dummy_character.feats).to include(new_feat)
