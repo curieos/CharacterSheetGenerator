@@ -8,7 +8,7 @@ class CharacterSheetGenerator::Character
 	# Takes in the character's name, race, class, abilities, equipment, hp, alignment, and background.
 	#
 	# Optionally takes personality traits, ideals, bonds, and flaws.
-	def initialize(_name, _race, _class, _abilities, _equipment, _hp, _alignment, _background, _personality_traits = "", _ideals = "", _bonds = "", _flaws = "")
+	def initialize(_name, _race, _class, _abilities, _equipment, _hp, _alignment, _background, _personality_traits: "", _ideals: "", _bonds: "", _flaws: "")
 		@name = _name
 		@race = _race
 		@classes = []
