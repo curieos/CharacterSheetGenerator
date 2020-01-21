@@ -1,5 +1,5 @@
 RSpec.describe "Race" do
-	let(:dummy_race) { CharacterSheetGenerator::Race.new("Elf", _subrace: "High Elf") }
+	let(:dummy_race) { CharacterSheetGenerator::Race.new("Elf", [CharacterSheetGenerator::RaceFeature::new("Dark Vision", "")], _subrace: "High Elf") }
 
 	it "exists" do
 		expect(dummy_race).to_not be_nil
@@ -11,5 +11,9 @@ RSpec.describe "Race" do
 
 	it "has an optional subrace" do
 		expect(dummy_race.subrace).to eq("High Elf")
+	end
+
+	it "has race features" do
+		expect(dummy_race.features).to_not be_nil
 	end
 end
