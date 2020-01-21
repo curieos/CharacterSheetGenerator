@@ -31,6 +31,10 @@ class CharacterSheetGenerator::Character
 		@flaws = _flaws
 	end
 
+	def size
+		@race.size
+	end
+
 	##
 	# Takes in the ability's name of type String and returns the ability's score (or nil if it's not found)
 	def ability_score(_ability)
