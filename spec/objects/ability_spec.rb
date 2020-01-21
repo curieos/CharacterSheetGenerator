@@ -17,6 +17,12 @@ RSpec.describe "Ability" do
 		expect(dummy_ability.bonus_score).to eq(2)
 	end
 
+	it "can be proficient" do
+		new_ability = CharacterSheetGenerator::Ability.new("Strength", 13, 2, {Athletics: 1}, true)
+
+		expect(new_ability.proficient).to eq(true)
+	end
+
 	it "has method #score that returns the total score" do
 		expect(dummy_ability.score).to eq(15)
 	end
