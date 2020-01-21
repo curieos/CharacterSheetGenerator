@@ -31,6 +31,10 @@ class CharacterSheetGenerator::Character
 		@flaws = _flaws
 	end
 
+	def speed
+		race.speed
+	end
+
 	def size
 		@race.size
 	end

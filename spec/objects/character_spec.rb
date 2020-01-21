@@ -87,6 +87,10 @@ RSpec.describe "Character" do
 			expect(dummy_character.race).to eq(dummy_race)
 		end
 
+		it "gets speed from race" do
+			expect(dummy_character.speed).to eq(30)
+		end
+
 		it "gets size from race" do
 			expect(dummy_character.size).to eq("Medium")
 		end
