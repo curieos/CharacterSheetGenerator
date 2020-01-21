@@ -22,6 +22,13 @@ RSpec.describe "Ability" do
 
 		expect(new_ability.proficient).to eq(true)
 	end
+	
+	it "has method #saving_throw that takes a proficiency bonus and returns the saving throw modifier" do
+		new_ability = CharacterSheetGenerator::Ability.new("Strength", 13, 2, {Athletics: 1}, true)
+
+		expect(dummy_ability.saving_throw(2)).to eq(2)
+		expect(new_ability.saving_throw(2)).to eq(4)
+	end
 
 	it "has method #score that returns the total score" do
 		expect(dummy_ability.score).to eq(15)
