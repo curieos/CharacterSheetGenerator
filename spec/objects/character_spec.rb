@@ -82,6 +82,30 @@ RSpec.describe "Character" do
 		expect(dummy_character.flaws).to_not be_nil
 	end
 
+	it "has a height" do
+		expect(dummy_character.height).to_not be_nil
+	end
+
+	it "has a weight" do
+		expect(dummy_character.weight).to_not be_nil
+	end
+
+	it "has an age" do
+		expect(dummy_character.age).to_not be_nil
+	end
+
+	it "has eyes" do
+		expect(dummy_character.eyes).to_not be_nil
+	end
+
+	it "has skin" do
+		expect(dummy_character.skin).to_not be_nil
+	end
+
+	it "has hair" do
+		expect(dummy_character.hair).to_not be_nil
+	end
+
 	describe "#race" do
 		it "has a race" do
 			expect(dummy_character.race).to eq(dummy_race)

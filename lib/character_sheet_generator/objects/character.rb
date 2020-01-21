@@ -2,13 +2,16 @@ class CharacterSheetGenerator::Character
 	##
 	# Total amount of hit points (not the current amount).
 	attr_reader :hit_points
-	attr_reader :name, :race, :classes, :abilities, :feats, :temp_hp, :experience, :alignment, :background, :personality_traits, :ideals, :bonds, :flaws
+	attr_reader :name, :race, :classes, :abilities, :feats, :temp_hp, :experience, :alignment, :background, 
+		:personality_traits, :ideals, :bonds, :flaws, :height, :weight, :age, :eyes, :skin, :hair
 
 	##
 	# Takes in the character's name, race, class, abilities, equipment, hp, alignment, and background.
 	#
 	# Optionally takes personality traits, ideals, bonds, and flaws.
-	def initialize(_name, _race, _class, _abilities, _equipment, _hp, _alignment, _background, _personality_traits: "", _ideals: "", _bonds: "", _flaws: "")
+	def initialize(_name, _race, _class, _abilities, _equipment, _hp, _alignment, _background, 
+		_personality_traits: "", _ideals: "", _bonds: "", _flaws: "", _height: "", _weight: "", _age: "", _eyes: "", _skin: "", _hair: "")
+
 		@name = _name
 		@race = _race
 		@classes = []
@@ -29,6 +32,12 @@ class CharacterSheetGenerator::Character
 		@ideals = _ideals
 		@bonds = _bonds
 		@flaws = _flaws
+		@height = _height
+		@weight = _weight
+		@age = _age
+		@eyes = _eyes
+		@skin = _skin
+		@hair = _hair
 	end
 
 	def speed
