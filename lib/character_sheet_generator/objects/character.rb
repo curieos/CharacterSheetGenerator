@@ -54,6 +54,13 @@ class CharacterSheetGenerator::Character
 	end
 
 	##
+	#
+	def saving_throw(_ability)
+		saving_throw = nil
+		saving_throw = @abilities.find { |ability| ability.name == _ability }.saving_throw(proficiency_bonus) if @abilities.find { |ability| ability.name == _ability }
+	end
+
+	##
 	# Takes in the skill's name of type String and returns the skill bonus (or nil if it's not found)
 	def skill_bonus(_skill)
 		bonus = nil

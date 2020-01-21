@@ -1,7 +1,7 @@
 RSpec.describe "Character" do
 	let(:dummy_background) { CharacterSheetGenerator::Background.new("Archaeologist") }
 	let(:dummy_equipment) { [CharacterSheetGenerator::Equipment.new("Club")] }
-	let(:dummy_abilites) { [CharacterSheetGenerator::Ability.new("STR", 15, 2, {Athletics: 1}),
+	let(:dummy_abilites) { [CharacterSheetGenerator::Ability.new("STR", 15, 2, {Athletics: 1}, true),
 		CharacterSheetGenerator::Ability.new("DEX", 13, 0, {Acrobatics: 0})] }
 	let(:dummy_class) { CharacterSheetGenerator::Class.new("Barbarian", 10, []) }
 	let(:dummy_race) {CharacterSheetGenerator::Race.new("Elf", 30, "Medium", [CharacterSheetGenerator::RaceFeature.new("Night Vision", "")])}
@@ -121,6 +121,14 @@ RSpec.describe "Character" do
 
 		it "#ability_modifier returns nil if not found" do
 			expect(dummy_character.ability_modifier("fake")).to be_nil
+		end
+
+		it "has method #saving_throw that returns the ability's saving throw modifier" do
+			expect(dummy_character.saving_throw("STR")).to eq(5)
+		end
+
+		it "#saving_throw returns nil if not found"  do
+			expect(dummy_character.saving_throw("fake")).to be_nil
 		end
 
 		it "has method #skill_bonus that returns the skill bonus" do
