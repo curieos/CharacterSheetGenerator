@@ -19,7 +19,13 @@ class CharacterSheetGenerator::Character
 		@abilities = _abilities
 		@feats = []
 
-		@currency = _currency
+		@currency = {}
+		@currency[:copper] = _currency.fetch(:copper, 0)
+		@currency[:silver] = _currency.fetch(:silver, 0)
+		@currency[:gold] = _currency.fetch(:gold, 0)
+		@currency[:electrum] = _currency.fetch(:electrum, 0)
+		@currency[:platinum] = _currency.fetch(:platinum, 0)
+
 		@equipment = _equipment
 
 		@hit_points = _hp

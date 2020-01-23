@@ -228,11 +228,11 @@ RSpec.describe "Character" do
 
 	describe "currency methods" do
 		it "has #currency variable" do
-			expect(dummy_character.currency.fetch(:copper, 0)).to eq(10)
-			expect(dummy_character.currency.fetch(:silver, 0)).to eq(0)
-			expect(dummy_character.currency.fetch(:gold, 0)).to eq(30)
-			expect(dummy_character.currency.fetch(:electrum, 0)).to eq(0)
-			expect(dummy_character.currency.fetch(:platinum, 0)).to eq(0)
+			expect(dummy_character.currency[:copper]).to eq(10)
+			expect(dummy_character.currency[:silver]).to eq(0)
+			expect(dummy_character.currency[:gold]).to eq(30)
+			expect(dummy_character.currency[:electrum]).to eq(0)
+			expect(dummy_character.currency[:platinum]).to eq(0)
 		end
 	end
 
