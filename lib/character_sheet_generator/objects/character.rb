@@ -55,6 +55,22 @@ class CharacterSheetGenerator::Character
 		@race.size
 	end
 
+	def features
+		collection = []
+		classes.each do |_class|
+			_class.features.each do |feature|
+				collection << feature
+			end
+		end
+		race.features.each do |feature|
+			collection << feature
+		end
+		feats.each do |feat|
+			collection << feat
+		end
+		collection
+	end
+
 	##
 	# Takes in the ability's name of type String and returns the ability's score (or nil if it's not found)
 	def ability_score(_ability)

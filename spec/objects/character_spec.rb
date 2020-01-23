@@ -3,7 +3,7 @@ RSpec.describe "Character" do
 	let(:dummy_equipment) { [CharacterSheetGenerator::Equipment.new("Club")] }
 	let(:dummy_abilites) { [CharacterSheetGenerator::Ability.new("STR", 15, 2, {Athletics: 1}, true),
 		CharacterSheetGenerator::Ability.new("DEX", 13, 0, {Acrobatics: 0})] }
-	let(:dummy_class) { CharacterSheetGenerator::Class.new("Barbarian", 10, []) }
+	let(:dummy_class) { CharacterSheetGenerator::Class.new("Barbarian", 10, [CharacterSheetGenerator::ClassFeature.new("Rage", "")]) }
 	let(:dummy_race) {CharacterSheetGenerator::Race.new("Elf", 30, "Medium", [CharacterSheetGenerator::RaceFeature.new("Night Vision", "")])}
 	let(:dummy_character) { CharacterSheetGenerator::Character.new("Dummy Name", dummy_race, dummy_class, dummy_abilites, dummy_equipment, 5, "Lawful Good", dummy_background, _currency: { copper: 10, gold: 30 }) }
 
@@ -104,6 +104,10 @@ RSpec.describe "Character" do
 
 	it "has hair" do
 		expect(dummy_character.hair).to_not be_nil
+	end
+
+	it "has features" do
+		expect(dummy_character.features.length).to eq(2)
 	end
 
 	describe "#race" do
