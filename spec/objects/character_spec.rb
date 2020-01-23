@@ -5,7 +5,7 @@ RSpec.describe "Character" do
 		CharacterSheetGenerator::Ability.new("DEX", 13, 0, {Acrobatics: 0})] }
 	let(:dummy_class) { CharacterSheetGenerator::Class.new("Barbarian", 10, []) }
 	let(:dummy_race) {CharacterSheetGenerator::Race.new("Elf", 30, "Medium", [CharacterSheetGenerator::RaceFeature.new("Night Vision", "")])}
-	let(:dummy_character) { CharacterSheetGenerator::Character.new("Dummy Name", dummy_race, dummy_class, dummy_abilites, dummy_equipment, 5, "Lawful Good", dummy_background) }
+	let(:dummy_character) { CharacterSheetGenerator::Character.new("Dummy Name", dummy_race, dummy_class, dummy_abilites, dummy_equipment, 5, "Lawful Good", dummy_background, _currency: { copper: 10, gold: 30 }) }
 
 	it "exists" do
 		expect(dummy_character).to_not be_nil
@@ -223,6 +223,16 @@ RSpec.describe "Character" do
 
 			expect(dummy_character.temp_hp).to eq(0)
 			expect(dummy_character.current_hp).to eq(4)
+		end
+	end
+
+	describe "currency methods" do
+		it "has #currency variable" do
+			expect(dummy_character.currency.fetch(:copper, 0)).to eq(10)
+			expect(dummy_character.currency.fetch(:silver, 0)).to eq(0)
+			expect(dummy_character.currency.fetch(:gold, 0)).to eq(30)
+			expect(dummy_character.currency.fetch(:electrum, 0)).to eq(0)
+			expect(dummy_character.currency.fetch(:platinum, 0)).to eq(0)
 		end
 	end
 
