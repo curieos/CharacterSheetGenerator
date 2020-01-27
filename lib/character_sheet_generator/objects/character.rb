@@ -9,7 +9,7 @@ class CharacterSheetGenerator::Character
 	# Takes in the character's name, race, class, abilities, equipment, hp, alignment, and background.
 	#
 	# Optionally takes personality traits, ideals, bonds, and flaws.
-	def initialize(_name, _race, _class, _abilities, _equipment, _hp, _alignment, _background, _currency: {copper: 0, silver: 0, gold: 0, electrum: 0, platinum: 0},
+	def initialize(_name, _race, _class, _abilities, _equipment, _hp, _alignment, _background, _currency: {},
 		_personality_traits: "", _ideals: "", _bonds: "", _flaws: "", _height: "", _weight: "", _age: "", _eyes: "", _skin: "", _hair: "")
 
 		@name = _name
@@ -55,6 +55,8 @@ class CharacterSheetGenerator::Character
 		@race.size
 	end
 
+	##
+	# Returns an Array of all features (including feats)
 	def features
 		collection = []
 		classes.each do |_class|
@@ -107,6 +109,14 @@ class CharacterSheetGenerator::Character
 	# Calculates a proficiency bonus based on the character's level
 	def proficiency_bonus
 		(level()+3)/4 + 1
+	end
+
+	def add_currency(_amount)
+		@currency[:copper] += _amount.fetch(:copper, 0)
+		@currency[:silver] += _amount.fetch(:silver, 0)
+		@currency[:gold] += _amount.fetch(:gold, 0)
+		@currency[:electrum] += _amount.fetch(:electrum, 0)
+		@currency[:platinum] += _amount.fetch(:platinum, 0)
 	end
 
 	##

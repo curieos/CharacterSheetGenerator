@@ -238,6 +238,16 @@ RSpec.describe "Character" do
 			expect(dummy_character.currency[:electrum]).to eq(0)
 			expect(dummy_character.currency[:platinum]).to eq(0)
 		end
+
+		it "can gain currency" do
+			dummy_character.add_currency({copper: 1, silver: 2, gold: 3, electrum: 4, platinum: 5})
+
+			expect(dummy_character.currency[:copper]).to eq(11)
+			expect(dummy_character.currency[:silver]).to eq(2)
+			expect(dummy_character.currency[:gold]).to eq(33)
+			expect(dummy_character.currency[:electrum]).to eq(4)
+			expect(dummy_character.currency[:platinum]).to eq(5)
+		end
 	end
 
 	describe "level methods" do
