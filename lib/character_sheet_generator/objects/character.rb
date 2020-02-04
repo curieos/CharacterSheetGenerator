@@ -111,12 +111,24 @@ class CharacterSheetGenerator::Character
 		(level()+3)/4 + 1
 	end
 
+	##
+	#
 	def add_currency(_amount)
 		@currency[:copper] += _amount.fetch(:copper, 0)
 		@currency[:silver] += _amount.fetch(:silver, 0)
 		@currency[:gold] += _amount.fetch(:gold, 0)
 		@currency[:electrum] += _amount.fetch(:electrum, 0)
 		@currency[:platinum] += _amount.fetch(:platinum, 0)
+	end
+
+	##
+	# 
+	def spend_currency(_amount) # not how this method should be done, idc right now
+		@currency[:copper] -= _amount.fetch(:copper, 0)
+		@currency[:silver] -= _amount.fetch(:silver, 0)
+		@currency[:gold] -= _amount.fetch(:gold, 0)
+		@currency[:electrum] -= _amount.fetch(:electrum, 0)
+		@currency[:platinum] -= _amount.fetch(:platinum, 0)
 	end
 
 	##

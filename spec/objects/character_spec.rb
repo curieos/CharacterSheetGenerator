@@ -248,6 +248,12 @@ RSpec.describe "Character" do
 			expect(dummy_character.currency[:electrum]).to eq(4)
 			expect(dummy_character.currency[:platinum]).to eq(5)
 		end
+
+		it "can spend currency" do
+			dummy_character.spend_currency({copper: 1})
+
+			expect(dummy_character.currency[:copper]).to eq(9)
+		end
 	end
 
 	describe "level methods" do
