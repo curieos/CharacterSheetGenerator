@@ -1,11 +1,11 @@
 RSpec.describe "Character" do
 	let(:dummy_background) { CharacterSheetGenerator::Background.new("Archaeologist") }
 	let(:dummy_equipment) { [CharacterSheetGenerator::Equipment.new("Club")] }
-	let(:dummy_abilites) { [CharacterSheetGenerator::Ability.new("STR", 15, 2, {Athletics: 1}),
+	let(:dummy_abilites) { [CharacterSheetGenerator::Ability.new("STR", 15, 2, {Athletics: 1}, true),
 		CharacterSheetGenerator::Ability.new("DEX", 13, 0, {Acrobatics: 0})] }
-	let(:dummy_class) { CharacterSheetGenerator::Class.new("Barbarian", 10, []) }
+	let(:dummy_class) { CharacterSheetGenerator::Class.new("Barbarian", 10, [CharacterSheetGenerator::ClassFeature.new("Rage", "")]) }
 	let(:dummy_race) {CharacterSheetGenerator::Race.new("Elf", 30, "Medium", [CharacterSheetGenerator::RaceFeature.new("Night Vision", "")])}
-	let(:dummy_character) { CharacterSheetGenerator::Character.new("Dummy Name", dummy_race, dummy_class, dummy_abilites, dummy_equipment, 5, "Lawful Good", dummy_background) }
+	let(:dummy_character) { CharacterSheetGenerator::Character.new("Dummy Name", dummy_race, dummy_class, dummy_abilites, dummy_equipment, 5, "Lawful Good", dummy_background, _currency: { copper: 10, gold: 30 }) }
 
 	it "exists" do
 		expect(dummy_character).to_not be_nil
@@ -82,9 +82,45 @@ RSpec.describe "Character" do
 		expect(dummy_character.flaws).to_not be_nil
 	end
 
+	it "has a height" do
+		expect(dummy_character.height).to_not be_nil
+	end
+
+	it "has a weight" do
+		expect(dummy_character.weight).to_not be_nil
+	end
+
+	it "has an age" do
+		expect(dummy_character.age).to_not be_nil
+	end
+
+	it "has eyes" do
+		expect(dummy_character.eyes).to_not be_nil
+	end
+
+	it "has skin" do
+		expect(dummy_character.skin).to_not be_nil
+	end
+
+	it "has hair" do
+		expect(dummy_character.hair).to_not be_nil
+	end
+
+	it "has features" do
+		expect(dummy_character.features.length).to eq(2)
+	end
+
 	describe "#race" do
 		it "has a race" do
 			expect(dummy_character.race).to eq(dummy_race)
+		end
+
+		it "gets speed from race" do
+			expect(dummy_character.speed).to eq(30)
+		end
+
+		it "gets size from race" do
+			expect(dummy_character.size).to eq("Medium")
 		end
 	end
 
@@ -113,6 +149,14 @@ RSpec.describe "Character" do
 
 		it "#ability_modifier returns nil if not found" do
 			expect(dummy_character.ability_modifier("fake")).to be_nil
+		end
+
+		it "has method #saving_throw that returns the ability's saving throw modifier" do
+			expect(dummy_character.saving_throw("STR")).to eq(5)
+		end
+
+		it "#saving_throw returns nil if not found"  do
+			expect(dummy_character.saving_throw("fake")).to be_nil
 		end
 
 		it "has method #skill_bonus that returns the skill bonus" do
@@ -183,6 +227,32 @@ RSpec.describe "Character" do
 
 			expect(dummy_character.temp_hp).to eq(0)
 			expect(dummy_character.current_hp).to eq(4)
+		end
+	end
+
+	describe "currency methods" do
+		it "has #currency variable" do
+			expect(dummy_character.currency[:copper]).to eq(10)
+			expect(dummy_character.currency[:silver]).to eq(0)
+			expect(dummy_character.currency[:gold]).to eq(30)
+			expect(dummy_character.currency[:electrum]).to eq(0)
+			expect(dummy_character.currency[:platinum]).to eq(0)
+		end
+
+		it "can gain currency" do
+			dummy_character.add_currency({copper: 1, silver: 2, gold: 3, electrum: 4, platinum: 5})
+
+			expect(dummy_character.currency[:copper]).to eq(11)
+			expect(dummy_character.currency[:silver]).to eq(2)
+			expect(dummy_character.currency[:gold]).to eq(33)
+			expect(dummy_character.currency[:electrum]).to eq(4)
+			expect(dummy_character.currency[:platinum]).to eq(5)
+		end
+
+		it "can spend currency" do
+			dummy_character.spend_currency({copper: 1})
+
+			expect(dummy_character.currency[:copper]).to eq(9)
 		end
 	end
 

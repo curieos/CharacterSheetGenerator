@@ -2,19 +2,29 @@ class CharacterSheetGenerator::Character
 	##
 	# Total amount of hit points (not the current amount).
 	attr_reader :hit_points
-	attr_reader :name, :race, :classes, :abilities, :feats, :temp_hp, :experience, :alignment, :background, :personality_traits, :ideals, :bonds, :flaws
+	attr_reader :name, :race, :classes, :abilities, :feats, :temp_hp, :experience, :alignment, :background, :currency,
+		:personality_traits, :ideals, :bonds, :flaws, :height, :weight, :age, :eyes, :skin, :hair
 
 	##
 	# Takes in the character's name, race, class, abilities, equipment, hp, alignment, and background.
 	#
 	# Optionally takes personality traits, ideals, bonds, and flaws.
-	def initialize(_name, _race, _class, _abilities, _equipment, _hp, _alignment, _background, _personality_traits = "", _ideals = "", _bonds = "", _flaws = "")
+	def initialize(_name, _race, _class, _abilities, _equipment, _hp, _alignment, _background, _currency: {},
+		_personality_traits: "", _ideals: "", _bonds: "", _flaws: "", _height: "", _weight: "", _age: "", _eyes: "", _skin: "", _hair: "")
+
 		@name = _name
 		@race = _race
 		@classes = []
 		@classes << _class
 		@abilities = _abilities
 		@feats = []
+
+		@currency = {}
+		@currency[:copper] = _currency.fetch(:copper, 0)
+		@currency[:silver] = _currency.fetch(:silver, 0)
+		@currency[:gold] = _currency.fetch(:gold, 0)
+		@currency[:electrum] = _currency.fetch(:electrum, 0)
+		@currency[:platinum] = _currency.fetch(:platinum, 0)
 
 		@equipment = _equipment
 
@@ -29,6 +39,38 @@ class CharacterSheetGenerator::Character
 		@ideals = _ideals
 		@bonds = _bonds
 		@flaws = _flaws
+		@height = _height
+		@weight = _weight
+		@age = _age
+		@eyes = _eyes
+		@skin = _skin
+		@hair = _hair
+	end
+
+	def speed
+		race.speed
+	end
+
+	def size
+		@race.size
+	end
+
+	##
+	# Returns an Array of all features (including feats)
+	def features
+		collection = []
+		classes.each do |_class|
+			_class.features.each do |feature|
+				collection << feature
+			end
+		end
+		race.features.each do |feature|
+			collection << feature
+		end
+		feats.each do |feat|
+			collection << feat
+		end
+		collection
 	end
 
 	##
@@ -46,6 +88,13 @@ class CharacterSheetGenerator::Character
 	end
 
 	##
+	# Takes in the ability's name of type String and returns the saving throw modifier (or nil if it's not found)
+	def saving_throw(_ability)
+		saving_throw = nil
+		saving_throw = @abilities.find { |ability| ability.name == _ability }.saving_throw(proficiency_bonus) if @abilities.find { |ability| ability.name == _ability }
+	end
+
+	##
 	# Takes in the skill's name of type String and returns the skill bonus (or nil if it's not found)
 	def skill_bonus(_skill)
 		bonus = nil
@@ -60,6 +109,26 @@ class CharacterSheetGenerator::Character
 	# Calculates a proficiency bonus based on the character's level
 	def proficiency_bonus
 		(level()+3)/4 + 1
+	end
+
+	##
+	#
+	def add_currency(_amount)
+		@currency[:copper] += _amount.fetch(:copper, 0)
+		@currency[:silver] += _amount.fetch(:silver, 0)
+		@currency[:gold] += _amount.fetch(:gold, 0)
+		@currency[:electrum] += _amount.fetch(:electrum, 0)
+		@currency[:platinum] += _amount.fetch(:platinum, 0)
+	end
+
+	##
+	# 
+	def spend_currency(_amount) # not how this method should be done, idc right now
+		@currency[:copper] -= _amount.fetch(:copper, 0)
+		@currency[:silver] -= _amount.fetch(:silver, 0)
+		@currency[:gold] -= _amount.fetch(:gold, 0)
+		@currency[:electrum] -= _amount.fetch(:electrum, 0)
+		@currency[:platinum] -= _amount.fetch(:platinum, 0)
 	end
 
 	##
