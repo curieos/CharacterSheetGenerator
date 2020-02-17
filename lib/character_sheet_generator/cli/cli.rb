@@ -1,6 +1,7 @@
 class CharacterSheetGenerator::CLI
-	def initialize(_url = "http://www.dnd5eapi.co/api/")
+	def initialize(_url = "www.dnd5eapi.co")
 		@characters = []
+		@races = CharacterSheetGenerator::Races.new(_url)
 		@classes = CharacterSheetGenerator::Classes.new(_url)
 	end
 
@@ -62,6 +63,22 @@ class CharacterSheetGenerator::CLI
 		puts "Enter a name for your character:"
 		name = gets.strip
 		puts ""
+		puts "Choose a race"
+		@races.list.each_with_index do |_race, index|
+			puts "#{index+1}: #{_race}"
+		end
+		race_selection = gets.strip.to_i
+		new_race = CharacterSheetGenerator::Race.new_from_hash(@races.get_race_by_index(race_selection))
+		puts ""
+		puts "Choose a class"
+		@classes.list.each_with_index do |_class, index|
+			puts "#{index+1}: #{_class}"
+		end
+		class_selection = gets.strip.to_i
+		new_class = CharacterSheetGenerator::Class.new_from_hash(@classes.get_class_by_index(class_selection))
+		@characters << CharacterSheetGenerator::Character.new(name, new_race, new_class, [], [], (new_class.hit_die/2)+1, "", "")
+		puts ""
+		puts "Character successfully created!"
 	end
 
 	def pdf

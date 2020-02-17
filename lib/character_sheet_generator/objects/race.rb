@@ -9,4 +9,9 @@ class CharacterSheetGenerator::Race
 		@size = _size
 		@features = _features
 	end
+
+	def self.new_from_hash(hash)
+		features = []
+		CharacterSheetGenerator::Race.new(hash["name"], hash["speed"], hash["size"], features)
+	end
 end

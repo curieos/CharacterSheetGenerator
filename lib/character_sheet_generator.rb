@@ -2,6 +2,7 @@ require_relative "./character_sheet_generator/version"
 
 #CLI
 require_relative "./character_sheet_generator/cli/cli"
+require_relative "./character_sheet_generator/cli/races"
 require_relative "./character_sheet_generator/cli/classes"
 
 #Objects

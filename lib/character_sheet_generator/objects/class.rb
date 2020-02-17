@@ -15,4 +15,9 @@ class CharacterSheetGenerator::Class
 
 		@level += 1
 	end
+
+	def self.new_from_hash(hash)
+		features = []
+		CharacterSheetGenerator::Class.new(hash["name"], hash["hit_die"], features)
+	end
 end
