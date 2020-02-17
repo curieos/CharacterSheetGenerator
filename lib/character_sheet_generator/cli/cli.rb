@@ -63,21 +63,34 @@ class CharacterSheetGenerator::CLI
 		puts "Enter a name for your character:"
 		name = gets.strip
 		puts ""
+
 		puts "Choose a race"
 		@races.list.each_with_index do |_race, index|
 			puts "#{index+1}: #{_race}"
 		end
-		race_selection = gets.strip.to_i
-		new_race = CharacterSheetGenerator::Race.new_from_hash(@races.get_race_by_index(race_selection))
+		race_selection = 0
+		loop do
+			race_selection = gets.strip.to_i
+
+			break if race_selection > 0 && race_selection <= @races.list.length
+		end
+		new_race = CharacterSheetGenerator::Race.new_from_hash(@races.get_race_by_index(race_selection-1))
 		puts ""
+
 		puts "Choose a class"
 		@classes.list.each_with_index do |_class, index|
 			puts "#{index+1}: #{_class}"
 		end
-		class_selection = gets.strip.to_i
-		new_class = CharacterSheetGenerator::Class.new_from_hash(@classes.get_class_by_index(class_selection))
+		class_selection = 0
+		loop do
+			class_selection = gets.strip.to_i
+
+			break if class_selection > 0 && class_selection <= @classes.list.length
+		end
+		new_class = CharacterSheetGenerator::Class.new_from_hash(@classes.get_class_by_index(class_selection-1))
 		@characters << CharacterSheetGenerator::Character.new(name, new_race, new_class, [], [], (new_class.hit_die/2)+1, "", "")
 		puts ""
+
 		puts "Character successfully created!"
 	end
 
