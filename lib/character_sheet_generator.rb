@@ -1,5 +1,5 @@
 require_relative "./character_sheet_generator/version"
-
+require 'pry'
 #CLI
 require_relative "./character_sheet_generator/cli/cli"
 require_relative "./character_sheet_generator/cli/races"
