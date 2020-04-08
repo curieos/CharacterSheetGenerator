@@ -55,7 +55,27 @@ class CharacterSheetGenerator::CLI
 		@characters.each do |character|
 			puts "#{character.name}"
 		end
-		puts ""
+		loop do
+			puts "\nChoose a character to see more details (exit to exit):"
+			selection = gets.strip
+
+			break if selection == "exit"
+
+			character = @characters.find { |character| character.name == selection }
+			if character
+				puts ""
+				puts <<-DOC.gsub /^\s*/, ''
+					Character Name: #{character.name}
+					Race: #{character.race.name}
+					Size: #{character.race.size}
+					Speed: #{character.race.speed}
+					Class: #{character.classes[0].name}
+					Hit Die: #{character.classes[0].hit_die}
+				DOC
+			else
+				puts "Character not found!"
+			end
+		end
 	end
 
 	def new_character
