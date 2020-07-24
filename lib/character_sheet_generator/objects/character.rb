@@ -5,6 +5,7 @@ class CharacterSheetGenerator::Character
 	attr_reader :name, :race, :classes, :abilities, :feats, :temp_hp, :experience, :alignment, :background, :currency,
 		:personality_traits, :ideals, :bonds, :flaws, :height, :weight, :age, :eyes, :skin, :hair
 
+	@@all = []
 	##
 	# Takes in the character's name, race, class, abilities, equipment, hp, alignment, and background.
 	#
@@ -45,6 +46,8 @@ class CharacterSheetGenerator::Character
 		@eyes = _eyes
 		@skin = _skin
 		@hair = _hair
+
+		@@all << self
 	end
 
 	def speed
@@ -201,5 +204,15 @@ class CharacterSheetGenerator::Character
 		@feats << _feat if _feat != nil
 
 		@hit_points += _additional_hp
+	end
+
+	def self.all()
+		@@all
+	end
+
+	def self.find_humans()
+		@@all.find_all do |character|
+			character.race.name == "Human"
+		end
 	end
 end

@@ -1,6 +1,5 @@
 class CharacterSheetGenerator::CLI
 	def initialize(_url = "www.dnd5eapi.co")
-		@characters = []
 		@races = CharacterSheetGenerator::Races.new(_url)
 		@classes = CharacterSheetGenerator::Classes.new(_url)
 	end
@@ -11,7 +10,10 @@ class CharacterSheetGenerator::CLI
 		loop do
 			input = gets.strip.downcase
 
-			break if input == "exit"
+			if input == "exit"
+				binding.pry
+				break
+			end
 
 			case input
 			when "export"
@@ -50,9 +52,9 @@ class CharacterSheetGenerator::CLI
 
 	def list
 		puts ""
-		return puts "No characters exist!\n\n" if @characters.length == 0
+		return puts "No characters exist!\n\n" if CharacterSheetGenerator::Character.all.length == 0
 		puts "Characters:"
-		@characters.each do |character|
+		CharacterSheetGenerator::Character.all.each do |character|
 			puts "#{character.name}"
 		end
 		loop do
@@ -61,7 +63,7 @@ class CharacterSheetGenerator::CLI
 
 			break if selection == "exit"
 
-			character = @characters.find { |character| character.name == selection }
+			character = CharacterSheetGenerator::Character.all.find { |character| character.name == selection }
 			if character
 				puts ""
 				puts <<-DOC.gsub /^\s*/, ''
@@ -108,7 +110,7 @@ class CharacterSheetGenerator::CLI
 			break if class_selection > 0 && class_selection <= @classes.list.length
 		end
 		new_class = CharacterSheetGenerator::Class.new_from_hash(@classes.get_class_by_index(class_selection-1))
-		@characters << CharacterSheetGenerator::Character.new(name, new_race, new_class, [], [], (new_class.hit_die/2)+1, "", "")
+		CharacterSheetGenerator::Character.new(name, new_race, new_class, [], [], (new_class.hit_die/2)+1, "", "")
 		puts ""
 
 		puts "Character successfully created!"
